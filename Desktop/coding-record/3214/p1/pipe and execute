@@ -1,0 +1,63 @@
+	if(pid == 0) {
+
+		printf("Starting: %s\n", list_entry(e, struct esh_command, elem);
+
+		if (e == list_end (&pipe->commands) { //holds one command
+
+			dup2(pipe_ends1[1], 1);
+			close(pipe_ends1[1]);
+			close(pipe_ends1[0]);
+			close(pipe_ends2[0]);
+			close(pipe_ends2[1]);
+		}
+		else { //holds more than one command
+			dup2(pipe_ends1[1], 1);
+			close(pipe_ends1[1]);
+			dup2(pipe_ends2[0], 0);
+			close(pipe_ends1[0]);
+			close(pipe_ends2[0]);
+			close(pipe_ends2[1]);
+		}
+
+		char* arry[2] = {list_entry(e, struct esh_command, elem), NULL};
+
+		execvp(list_entry(e, struct esh_command, elem), arry);
+
+	}
+	else {
+	
+		for (; e != list_end (&pipe->commands); e = list_next (e)) {
+	
+			if(pid != 0) {
+				pid = fork();
+				if (pid < 0)
+					perror("fork"), exit(0);
+			}
+
+			if(pid == 0) {
+	
+	                        printf("Starting: %s\n", argv[2]);
+	
+				dup2(pipe_ends1[0], 0);
+				close(pipe_ends1[0]);
+				dup2(pipe_ends2[1], 1);
+				close(pipe_ends1[1]);
+				close(pipe_ends2[0]);
+				close(pipe_ends2[1]);
+		
+				execvp(list _entry(e, struct esh_command, elem), argv);
+				break;
+			}
+		}
+		if (pid != 0) {
+
+			close(pipe_ends1[0]);
+			close(pipe_ends1[1]);
+			close(pipe_ends2[0]);
+			close(pipe_ends2[1]);
+			wait(NULL);
+			wait(NULL);
+		}
+
+		exit(0);
+	}
